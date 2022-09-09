@@ -99,6 +99,14 @@ public class Menu<T> implements Listener {
         this.closeable = closeable;
     }
 
+    public void add(Button<T> button) {
+        if (getFirstEmpty() < 0) {
+            return;
+        }
+
+        buttons.put(getFirstEmpty(), button);
+    }
+
     public void add(int slot, Button<T> button) {
         buttons.put(slot, button);
     }
@@ -192,6 +200,12 @@ public class Menu<T> implements Listener {
                 .filter(slot -> get(slot) == null)
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    private int getFirstEmpty() {
+        return getEmptySlots().stream()
+                .findFirst()
+                .orElse(-1);
     }
 
     private void createInventory() {
