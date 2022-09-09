@@ -256,11 +256,19 @@ public class Menu<T> implements Listener {
         T t = adapter.adapt((Player) event.getPlayer());
 
         if (!closeable) {
+            if (inventory.getViewers().isEmpty()) {
+                unregister();
+            }
+
             open(t);
             return;
         }
 
         close.accept(t, event);
+
+        if (inventory.getViewers().isEmpty()) {
+            unregister();
+        }
     }
 
 }
