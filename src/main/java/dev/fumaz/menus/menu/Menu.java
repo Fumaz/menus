@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -142,8 +143,18 @@ public class Menu<T> implements Listener {
         }
     }
 
+    public void fill(Supplier<Button<T>> buttonSupplier) {
+        for (int slot = 0; slot < slots; ++slot) {
+            add(slot, buttonSupplier.get());
+        }
+    }
+
     public void fillEmpty(Button<T> button) {
         getEmptySlots().forEach(slot -> add(slot, button));
+    }
+
+    public void fillEmpty(Supplier<Button<T>> buttonSupplier) {
+        getEmptySlots().forEach(slot -> add(slot, buttonSupplier.get()));
     }
 
     public void fillRow(int row, Button<T> button) {
@@ -155,6 +166,18 @@ public class Menu<T> implements Listener {
     public void fillColumn(int column, Button<T> button) {
         for (int i = 0; i < (slots / 9); i++) {
             add((i * 9) + (column - 1), button);
+        }
+    }
+
+    public void fillRow(int row, Supplier<Button<T>> buttonSupplier) {
+        for (int slot = (row - 1) * 9; slot < row * 9; slot++) {
+            add(slot, buttonSupplier.get());
+        }
+    }
+
+    public void fillColumn(int column, Supplier<Button<T>> buttonSupplier) {
+        for (int i = 0; i < (slots / 9); i++) {
+            add((i * 9) + (column - 1), buttonSupplier.get());
         }
     }
 
