@@ -2,6 +2,7 @@ package dev.fumaz.menus.menu;
 
 import dev.fumaz.menus.adapter.ClickAdapter;
 import dev.fumaz.menus.button.Button;
+import dev.fumaz.menus.customizer.Customizer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -129,6 +130,10 @@ public class Menu<T> implements Listener {
 
     public Button<T> get(int slot) {
         return buttons.get(slot);
+    }
+
+    public void customize(Customizer<T> customizer) {
+        customizer.customize(this);
     }
 
     public void fill(Button<T> button) {
