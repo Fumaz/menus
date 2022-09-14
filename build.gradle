@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group = 'dev.fumaz'
@@ -8,6 +9,7 @@ version = '1.0.1'
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 repositories {
     mavenCentral()
@@ -19,13 +21,18 @@ repositories {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
+    maven {
+        name = 'fumaz'
+        url = 'https://nexus.fumaz.dev/repository/maven-public/'
+    }
 }
 
 dependencies {
     compileOnly 'io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT'
+    implementation 'dev.fumaz:items:1.0.1'
 }
 
-jar {
+shadowJar {
     archiveFileName = 'menus.jar'
 }
 
@@ -68,5 +75,5 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 tasks.withType(PublishToMavenRepository) {
-    dependsOn('jar')
+    dependsOn('shadowJar')
 }

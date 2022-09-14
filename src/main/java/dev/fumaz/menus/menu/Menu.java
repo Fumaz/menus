@@ -137,6 +137,14 @@ public class Menu<T> implements Listener {
         customizer.customize(this);
     }
 
+    public int slots() {
+        return slots;
+    }
+
+    public int rows() {
+        return slots / 9;
+    }
+
     public void fill(Button<T> button) {
         for (int slot = 0; slot < slots; ++slot) {
             add(slot, button);
@@ -179,6 +187,10 @@ public class Menu<T> implements Listener {
         for (int i = 0; i < (slots / 9); i++) {
             add((i * 9) + (column - 1), buttonSupplier.get());
         }
+    }
+
+    public void clear() {
+        buttons.clear();
     }
 
     public void open(T t) {
