@@ -17,6 +17,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -249,7 +250,7 @@ public class Menu<T> implements Listener {
     }
 
     private void createInventory() {
-        List<HumanEntity> viewers = inventory.getViewers();
+        List<HumanEntity> viewers = inventory != null ? inventory.getViewers() : new ArrayList<>();
 
         if (inventoryType != null) {
             this.inventory = Bukkit.createInventory(null, inventoryType, title);
