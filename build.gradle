@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'dev.fumaz'
-version = '1.0.4'
+version = '1.0.5'
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
@@ -58,7 +58,7 @@ publishing {
     }
 }
 
-def targetJavaVersion = 17
+def targetJavaVersion = 8
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
